@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CounterX
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
@@ -25,3 +26,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+=======
+# counter-ngrx
+A simple Angular counter app using NgRx Store, Actions, Reducers, Selectors, and optional Effects. Demonstrates reactive state management and unidirectional data flow in a clean, modular structure. Ideal for beginners learning NgRx and state handling.
+>>>>>>> 310f942eb26d19f34dc6c6382bf3fced0254bce1
