@@ -1,0 +1,12 @@
+        <div class="container">
+            <div class="calc">
+                <h1>Counter<div class="counter-value" 
+                [ngClass]="{'forword':(animated$ | async) === 1 && !isReset,
+                            'backward':(animated$ | async) === 0 && !isReset,
+                            'reset':isReset}"></div></h1>
+                <h2>{{count$ | async}}</h2>
+                <button (click)="onIncrement()">+</button>
+                <button (click)="OnDecrement()">-</button>
+                <button (click)="onReset()">Reset</button>
+            </div>
+        </div>
