@@ -1,4 +1,4 @@
-# 🔁 Common NgRx Example (with Polling API for 0s & 1s)
+# 🔁 Common NgRx Example by Counter App (with Polling API for 0s & 1s)
 
 This is a minimal, reusable NgRx setup that shows:
 
