@@ -1,12 +1,32 @@
         <div class="container">
             <div class="calc">
-                <h1>Counter<div class="counter-value" 
-                [ngClass]="{'forword':(animated$ | async) === 1 && !isReset,
-                            'backward':(animated$ | async) === 0 && !isReset,
-                            'reset':isReset}"></div></h1>
+                <h1>Counter
+                    <!-- 
+                    ngClass logic:
+                    - 'forword': applied when indicator === 1 and not in reset state
+                    - 'backward': applied when indicator === 0 and not in reset state
+                    - 'reset': applied when reset is true
+                  -->
+                  <div class="counter-value" 
+                    [ngClass]="{
+                      'forword': (animated$ | async) === 1 && !isReset,
+                      'backward': (animated$ | async) === 0 && !isReset,
+                      'reset': isReset
+                    }">
+                  </div>
+                  </h1>
                 <h2>{{count$ | async}}</h2>
-                <button (click)="onIncrement()">+</button>
-                <button (click)="OnDecrement()">-</button>
-                <button (click)="onReset()">Reset</button>
+             
+    <!-- Display the counter value -->
+    <h2>{{ count$ | async }}</h2>
+
+    <!-- Dispatch increment action -->
+    <button (click)="onIncrement()">+</button>
+
+    <!-- Dispatch decrement action -->
+    <button (click)="OnDecrement()">-</button>
+
+    <!-- Dispatch reset action -->
+    <button (click)="onReset()">Reset</button>
             </div>
         </div>

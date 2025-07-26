@@ -13,24 +13,32 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./counter.component.css']
 })
 export class CounterComponent implements OnInit , OnDestroy {
-  count$!:Observable<number>
-  animated$!:Observable<number>
-  private poll! : Subscription
-  indicator: any;
+  count$!: Observable<number>;           // Observable for counter value from store
+  animated$!: Observable<number>;        // Observable for polling indicator value from store
+  private poll!: Subscription;           // Subscription for manual polling
+  indicator: any;                        // UI animation
   isReset = false;
+
 constructor(private store: Store, private http : HttpClient){}
+
 ngOnInit(): void {
+  // From select the current counter value from store
   this.count$ = this.store.select(selectCount)
+  // From action - Dispatch action to start polling via NgRx Effect
   this.store.dispatch(IndicatorAction.indicator())
+  // Subscribe to the latest indicator value from store
   this.animated$ = this.store.select(selectIndicate)
+
+  // Optional: Manual polling example (if Effects are not used)
   // this.poll = interval(1000).pipe(
-  //   switchMap(()=>this.http.get<{value:number}>('http://localhost:4000/api/toggle'))
+  //   switchMap(()=>this.http.get<{value:number}>('https://ngrxapi-jwl7i5vwr-ibrahims-projects-988849cf.vercel.app/api/binary'))
   // ).subscribe(res=>{
   //  console.log(res.value);
   //   this.indicator = res.value
   // })
 }
 
+ // Dispatch increment action and stop polling
 onIncrement(){
   this.store.dispatch(increment())
       this.poll.unsubscribe();
@@ -38,17 +46,20 @@ onIncrement(){
   // this.store.dispatch(CounterAction.increment())
 
 }
+  // Dispatch decrement action and stop polling
 OnDecrement(){
   this.store.dispatch(decrement())
       this.poll.unsubscribe();
     // or
   // this.store.dispatch(CounterAction.decrement())
 }
+  // Unsubscribe from polling on component destroy
 onReset(){
   this.store.dispatch(CounterAction.reset())
   this.isReset = true
       this.poll.unsubscribe();
 }
+  // Unsubscribe from polling on component destroy
 ngOnDestroy(): void {
       if (this.poll) {
       this.poll.unsubscribe();
