@@ -9,14 +9,12 @@
                   -->
                   <div class="counter-value" 
                     [ngClass]="{
-                      'forword': (animated$ | async) === 1 && !isReset,
-                      'backward': (animated$ | async) === 0 && !isReset,
+                      'forword': indicator === 1 && !isReset,
+                      'backward': indicator === 0 && !isReset,
                       'reset': isReset
                     }">
                   </div>
-                  </h1>
-                <h2>{{count$ | async}}</h2>
-             
+                  </h1>             
     <!-- Display the counter value -->
     <h2>{{ count$ | async }}</h2>
 

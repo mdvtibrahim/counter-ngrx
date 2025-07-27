@@ -27,7 +27,9 @@ ngOnInit(): void {
   // From action - Dispatch action to start polling via NgRx Effect
   this.store.dispatch(IndicatorAction.indicator())
   // Subscribe to the latest indicator value from store
-  this.animated$ = this.store.select(selectIndicate)
+  this.poll = this.store.select(selectIndicate).subscribe(val => {
+  this.indicator = val
+  })
 
   // Optional: Manual polling example (if Effects are not used)
   // this.poll = interval(1000).pipe(
@@ -38,31 +40,31 @@ ngOnInit(): void {
   // })
 }
 
- // Dispatch increment action and stop polling
+ // Dispatch increment action and stop polling(if u want)
 onIncrement(){
   this.store.dispatch(increment())
-      this.poll.unsubscribe();
+      // this.poll.unsubscribe(); // (if u want)
   // or
   // this.store.dispatch(CounterAction.increment())
 
 }
-  // Dispatch decrement action and stop polling
+  // Dispatch decrement action and stop polling(if u want)
 OnDecrement(){
   this.store.dispatch(decrement())
-      this.poll.unsubscribe();
+      // this.poll.unsubscribe(); // (if u want)
     // or
   // this.store.dispatch(CounterAction.decrement())
 }
   // Unsubscribe from polling on component destroy
 onReset(){
-  this.store.dispatch(CounterAction.reset())
-  this.isReset = true
-      this.poll.unsubscribe();
+  this.store.dispatch(CounterAction.reset());
+  this.store.dispatch(CounterAction.stopIndicator()); // stops api polling
+  this.isReset = true;
 }
   // Unsubscribe from polling on component destroy
 ngOnDestroy(): void {
-      if (this.poll) {
-      this.poll.unsubscribe();
-    }
+  if (this.poll) {
+  this.poll.unsubscribe();
+ }
 }
 }

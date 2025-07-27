@@ -15,3 +15,6 @@ export const indicator = createAction('[Indictor] Poll')
 export const pollIndicatorSuceess = createAction('[Indicator]PollSuccess',props<{value:number}>())
 // Action dispatched on polling failure with error object
 export const pollIndicatorFailure = createAction('[Indicator]PollFailure',props<{err:any}>())
+
+// for stop the action
+export const stopIndicator = createAction('[Indicator] Stop Polling');
